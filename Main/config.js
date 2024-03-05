@@ -5,13 +5,18 @@ module.exports = {
     token: token.token,
     clientId: '1212363560492077097',
     guildId: '1038480254085373983',
-    database: {
-        dialect: 'mysql',
-        host: 'localhost',        // Replace with your MySQL host
-        port: 3306,               // Replace with your MySQL port
-        username: 'root',// Replace with your MySQL username
-        password: 'Mwr7rz9hctqwSuZx',// Replace with your MySQL password
-        database: 'RKTUDatabase' // Replace with your MySQL database name
-      },
+    dialect: 'mysql',
+    host: 'rktudatabases-do-user-15983434-0.c.db.ondigitalocean.com', // DigitalOcean MySQL host
+    port: 25060, // DigitalOcean MySQL port
+    username: 'doadmin', // DigitalOcean MySQL username
+    password: 'your_password', // Replace with your DigitalOcean MySQL password
+    database: 'defaultdb', // Replace with your DigitalOcean MySQL database name
+    ssl: true,
+        dialectOptions: {
+        ssl: {
+            require: true,
+            rejectUnauthorized: false // <<<<<<< This is important to disable rejection of self-signed SSL certificates
+      }
+    }
   };
   
