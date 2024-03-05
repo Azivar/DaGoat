@@ -28,14 +28,6 @@ const Members = sequelize.define('Members', {
     defaultValue: false,
     allowNull: false,
   },
-  Team: {
-    type: DataTypes.BOOLEAN,
-    allowNull: true,
-  },
-  teamId: {
-    type: DataTypes.INTEGER,
-    allowNull: true,
-  },
   Team_Association: {
     type: DataTypes.STRING,
     allowNull: true,
@@ -67,7 +59,7 @@ const Members = sequelize.define('Members', {
   Platform:{
     type: DataTypes.STRING,
     defaultValue: false,
-    allownNull: true,
+    allowNull: true,
   }
 });
 

@@ -1,27 +1,47 @@
 {
   "development": {
     "dialect": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "username": "root",
-    "password": "Mwr7rz9hctqwSuZx",
-    "database": "RKTUDatabase",
-    "logging": true  
+    "host": "rktudatabases-do-user-15983434-0.c.db.ondigitalocean.com",
+    "port": 25060,
+    "username": "doadmin",
+    "password": "AVNS_54TiighX5W-XQ7SGMuH",
+    "database": "defaultdb",
+    "ssl": true,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "test": {
     "dialect": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "username": "root",
-    "password": "Mwr7rz9hctqwSuZx",
-    "database": "database_test"
+    "host": "rktudatabases-do-user-15983434-0.c.db.ondigitalocean.com",
+    "port": 25060,
+    "username": "doadmin",
+    "password": "AVNS_54TiighX5W-XQ7SGMuH",
+    "database": "defaultdbtest",
+    "ssl": true,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   },
   "production": {
     "dialect": "mysql",
-    "host": "localhost",
-    "port": 3306,
-    "username": "root",
-    "password": "Mwr7rz9hctqwSuZx",
-    "database": "database_production"
+    "host": "rktudatabases-do-user-15983434-0.c.db.ondigitalocean.com",
+    "port": 25060,
+    "username": "doadmin",
+    "password": "AVNS_54TiighX5W-XQ7SGMuH",
+    "database": "Official",
+    "ssl": true,
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }

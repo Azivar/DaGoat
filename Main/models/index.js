@@ -5,7 +5,7 @@ const path = require('path');
 const Sequelize = require('sequelize');
 const process = require('process');
 const basename = path.basename(__filename);
-const env = process.env.NODE_ENV || 'development';
+const env = process.env.NODE_ENV || 'test';
 const config = require(__dirname + '/../config/config.json')[env];
 const db = {};
 
@@ -36,6 +36,13 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
+
+// Assuming 'Members' are the names of your models
+db.Members = require('./members')(sequelize, Sequelize.DataTypes);
+
+// Define the associations
+db.Members.belongsTo(db.Teams, { foreignKey: 'Team_Association', targetKey: 'team_name', as: 'associatedTeam' });
+db.Members.belongsTo(db.Teams, { foreignKey: 'teamId', as: 'team' });
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
