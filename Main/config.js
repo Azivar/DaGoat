@@ -9,7 +9,7 @@ module.exports = {
     host: 'rktudatabases-do-user-15983434-0.c.db.ondigitalocean.com', // DigitalOcean MySQL host
     port: 25060, // DigitalOcean MySQL port
     username: 'doadmin', // DigitalOcean MySQL username
-    password: 'your_password', // Replace with your DigitalOcean MySQL password
+    password: token.password, // Replace with your DigitalOcean MySQL password
     database: 'defaultdb', // Replace with your DigitalOcean MySQL database name
     ssl: true,
         dialectOptions: {
