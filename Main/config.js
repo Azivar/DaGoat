@@ -1,6 +1,8 @@
 // config.js
+const token = require('./token');
+
 module.exports = {
-    token: 'MTIxMjM2MzU2MDQ5MjA3NzA5Nw.GXSije.lqMcAA4dO895ro4JWxhFmpXaGBDElEHcTrudnc',
+    token: token.token,
     clientId: '1212363560492077097',
     guildId: '1038480254085373983',
     database: {
