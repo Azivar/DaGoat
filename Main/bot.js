@@ -5,6 +5,7 @@ const { REST } = require('@discordjs/rest');
 const { Routes } = require('discord-api-types/v10');
 const config = require('./config');
 const Members = require('./models/members');
+const { assignRoleToNewMember } = require('./roleControl/roleAssign'); // Adjust the path accordingly
 
 const commands = [
   require('./commands/updateMember'),
@@ -67,6 +68,7 @@ const handleNewMember = async (member) => {
       });
   
       console.log('Member added to the database successfully.');
+      assignRoleToNewMember(member);
   
       // You can add more logic here based on the system channel or member details
     } catch (error) {

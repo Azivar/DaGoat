@@ -1,0 +1,23 @@
+// roleControl/roleAssign.js
+
+const { Client } = require('discord.js');
+
+async function assignRoleToNewMember(member) {
+  try {
+    const guild = member.guild;
+    const role = guild.roles.cache.find(role => role.name === 'Fresh Meat');
+
+    if (role) {
+      await member.roles.add(role);
+      console.log(`Assigned role ${role.name} to ${member.user.tag}`);
+    } else {
+      console.error('Role not found');
+    }
+  } catch (error) {
+    console.error('Error assigning role:', error);
+  }
+}
+
+module.exports = {
+  assignRoleToNewMember,
+};
