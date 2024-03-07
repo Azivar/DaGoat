@@ -1,0 +1,35 @@
+// commands/setOrientation.js
+const { SlashCommandBuilder } = require('@discordjs/builders');
+const { giveOrientationRole } = require('../roleControl'); // Replace with the actual path to your updateOrientation function
+
+module.exports = {
+  data: new SlashCommandBuilder()
+    .setName('setorientation')
+    .setDescription('Set orientation status for a user')
+    .addStringOption(option =>
+      option
+        .setName('user')
+        .setDescription('Discord name of the user')
+        .setRequired(true)
+    )
+    .addBooleanOption(option =>
+      option
+        .setName('enableOrientation')
+        .setDescription('Orientation Done?')
+        .setRequired(true)
+    ),
+  async execute(interaction) {
+    const userName = interaction.options.getString('user');
+    const enableOrientation = interaction.options.getBoolean('enableOrientation');
+
+    // Update the orientation in the database based on the Discord name
+    const databaseUpdateResult = await giveOrientationRole(userName);
+
+    // Check if the database update was successful
+    if (databaseUpdateResult) {
+      await interaction.reply(`Orientation status updated for ${userName} to ${enableOrientation}`);
+    } else {
+      await interaction.reply(`Failed to update orientation status for ${userName} in the database.`);
+    }
+  },
+};

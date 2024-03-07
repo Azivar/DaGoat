@@ -5,13 +5,40 @@ const { Client } = require('discord.js');
 async function assignRoleToNewMember(member) {
   try {
     const guild = member.guild;
-    const role = guild.roles.cache.find(role => role.name === 'Fresh Meat');
+    const roleName = 'Newbie';
+
+    console.log('Guild:', guild);
+    // Check if the guild and roles cache are available
+    if (!guild || !guild.available || !guild.roles || !guild.roles.cache) {
+      console.error('Guild or roles cache not available.');
+      return;
+    }
+
+    // Ensure that the bot has finished initializing and has access to the guild
+    await guild.members.fetch(); // This fetches all members in the guild
+
+    // Check if the role exists in the guild
+    const role = guild.roles.cache.find(role => role.name === roleName);
 
     if (role) {
+      const botMember = guild.members.me;
+      // Check if the bot has the 'MANAGE_ROLES' permission
+      if (!botMember || !botMember.permissions.has('MANAGE_ROLES')) {
+        console.error('Bot does not have the MANAGE_ROLES permission.');
+        return;
+      }
+
+      // Check if the member is already in the role
+      if (member.roles && member.roles.cache && member.roles.cache.has(role.id)) {
+        console.log(`${member.user.tag} already has the ${role.name} role.`);
+        return;
+      }
+
+      // Add the role to the member
       await member.roles.add(role);
       console.log(`Assigned role ${role.name} to ${member.user.tag}`);
     } else {
-      console.error('Role not found');
+      console.error(`Role '${roleName}' not found in the guild.`);
     }
   } catch (error) {
     console.error('Error assigning role:', error);

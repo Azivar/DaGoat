@@ -8,8 +8,9 @@ const Members = require('./models/members');
 const { assignRoleToNewMember } = require('./roleControl/roleAssign'); // Adjust the path accordingly
 
 const commands = [
-  require('./commands/updateMember'),
-  require('./commands/addNewMember'),
+  require('./commands/databasecontrol/updateMember'),
+  require('./commands/databasecontrol/addNewMember'),
+  require('./commands/databasecontrol/checkmember'),
 ];
 
 // Create a new Discord client
@@ -44,10 +45,30 @@ const handleNewMember = async (member) => {
     console.log('Handling new member event...');
     try {
       console.log('New member joined:', member.user.tag);
+
+      assignRoleToNewMember(member);
   
+
+
+
+
+
       // Use the Sequelize instance for database operations
       await sequelize.sync(); // Ensure tables are created (if they don't exist)
   
+
+      const existingMember = await Members.findOne({
+        where: {
+          Discord_ID: member.id,
+        },
+      });
+
+
+
+      if (existingMember) {
+        console.log('User already exists in the database.');
+        return;
+      }
       // Get the guild object
       const guild = member.guild;
   
@@ -59,6 +80,12 @@ const handleNewMember = async (member) => {
       // You can perform additional logic here if needed
       // For example, you can directly add the new member to the database here
   
+
+
+
+
+
+
       // Add new member to the database (example)
       await Members.create({
         Discord_ID: member.id,
@@ -68,7 +95,7 @@ const handleNewMember = async (member) => {
       });
   
       console.log('Member added to the database successfully.');
-      assignRoleToNewMember(member);
+
   
       // You can add more logic here based on the system channel or member details
     } catch (error) {
@@ -83,12 +110,31 @@ client.once('ready', () => {
   console.log(`Logged in as ${client.user.tag}!`);
 });
 
+
+
+
+
+
+
+
+
+
 // Event listener for when a slash command is executed
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
 
+
+
+
   const { commandName } = interaction;
 
+  
+
+
+
+
+
+  
   try {
     const command = commands.find(cmd => cmd.data.name === commandName);
     if (command) {

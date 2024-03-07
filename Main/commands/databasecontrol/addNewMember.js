@@ -1,7 +1,7 @@
 // commands/addNewMember.js
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { DataTypes } = require('sequelize');
-const Members = require('../models/members');
+const Members = require('../../models/members');
 
 module.exports = {
   data: new SlashCommandBuilder()

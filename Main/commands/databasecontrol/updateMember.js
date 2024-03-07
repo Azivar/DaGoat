@@ -1,6 +1,6 @@
 // commands/updateMember.js
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const Members = require('../models/members');
+const Members = require('../../models/members');
 
 module.exports = {
   data: new SlashCommandBuilder()
